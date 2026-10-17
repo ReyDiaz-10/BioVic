@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ApplicationIcon>BioVic.ico</ApplicationIcon>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>BioVic</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="BioVic.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="biovic.client.example.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <ProjectReference Include="..\BioVic.Application\BioVic.Application.csproj" />
+    <ProjectReference Include="..\BioVic.Domain\BioVic.Domain.csproj" />
+  </ItemGroup>
+</Project>

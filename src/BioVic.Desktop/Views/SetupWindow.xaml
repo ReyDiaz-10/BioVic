@@ -1,0 +1,26 @@
+<Window x:Class="BioVic.Desktop.Views.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Configuración inicial de BioVic" Width="540" Height="680" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="38,28"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+            <StackPanel>
+                <Border Width="54" Height="54" CornerRadius="17" Background="{StaticResource PrimaryBrush}" HorizontalAlignment="Left"><TextBlock Text="B" Foreground="White" FontSize="29" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+                <TextBlock Text="CONFIGURACIÓN INICIAL DE BIOVIC" FontSize="11" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" Margin="0,20,0,5" />
+                <TextBlock Text="Crea el Administrador Maestro" FontSize="25" FontWeight="Bold" />
+                <TextBlock Text="BioVic solo permite un Administrador Maestro. Esta es una cuenta interna de BioVic; no corresponde a la cuenta de Azure ni al correo institucional." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,8,0,12" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Nombre" Style="{StaticResource FieldLabel}" /><TextBox x:Name="FirstNameBox" TabIndex="1" />
+                <TextBlock Text="Apellidos" Style="{StaticResource FieldLabel}" /><TextBox x:Name="LastNameBox" TabIndex="2" />
+                <TextBlock Text="Usuario" Style="{StaticResource FieldLabel}" /><TextBox x:Name="UsernameBox" TabIndex="3" />
+                <TextBlock Text="Correo (opcional)" Style="{StaticResource FieldLabel}" /><TextBox x:Name="EmailBox" TabIndex="4" />
+                <TextBlock Text="Contraseña" Style="{StaticResource FieldLabel}" /><PasswordBox x:Name="PasswordBox" TabIndex="5" />
+                <TextBlock Text="Confirmar contraseña" Style="{StaticResource FieldLabel}" /><PasswordBox x:Name="ConfirmPasswordBox" TabIndex="6" />
+                <TextBlock Text="Mínimo 10 caracteres, con mayúscula, minúscula, número y símbolo." Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,7,0,0" />
+                <TextBlock x:Name="ErrorText" Foreground="#BE3A3A" TextWrapping="Wrap" Margin="0,12,0,0" />
+            </StackPanel>
+            <Button Grid.Row="2" x:Name="CreateButton" Content="Crear Administrador Maestro" Style="{StaticResource PrimaryButton}" Margin="0,20,0,0" Click="CreateButton_Click" TabIndex="7" />
+        </Grid>
+    </ScrollViewer>
+</Window>

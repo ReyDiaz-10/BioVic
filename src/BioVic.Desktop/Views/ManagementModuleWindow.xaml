@@ -1,0 +1,38 @@
+<Window x:Class="BioVic.Desktop.Views.ManagementModuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BioVic" Height="650" Width="980" WindowStartupLocation="CenterOwner">
+    <Grid Margin="26">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock x:Name="TitleText" FontSize="26" FontWeight="Bold"/>
+            <TextBlock x:Name="DescriptionText" Margin="0,6,0,0" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,18,0,12">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="220"/></Grid.ColumnDefinitions>
+            <TextBox x:Name="FilterBox" TextChanged="FilterBox_TextChanged" ToolTip="Filtrar equipos"/>
+            <ComboBox x:Name="SortBox" Grid.Column="1" Margin="12,0,0,0" SelectionChanged="SortBox_SelectionChanged">
+                <ComboBoxItem Content="Nombre A–Z" Tag="NameAsc" IsSelected="True"/><ComboBoxItem Content="Nombre Z–A" Tag="NameDesc"/>
+                <ComboBoxItem Content="Modelo A–Z" Tag="ModelAsc"/><ComboBoxItem Content="Mantenimiento más próximo" Tag="MaintenanceAsc"/>
+                <ComboBoxItem Content="Mantenimiento más lejano" Tag="MaintenanceDesc"/><ComboBoxItem Content="Último mantenimiento reciente" Tag="LastMaintenanceDesc"/><ComboBoxItem Content="Último mantenimiento antiguo" Tag="LastMaintenanceAsc"/>
+            </ComboBox>
+        </Grid>
+        <DataGrid x:Name="EquipmentGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Equipo" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Código" Binding="{Binding InternalCode}" Width="*"/>
+                <DataGridTextColumn Header="Modelo" Binding="{Binding Model}" Width="*"/>
+                <DataGridTextColumn Header="Ubicación" Binding="{Binding Location}" Width="2*"/>
+                <DataGridTextColumn Header="Último mantenimiento" Binding="{Binding LastMaintenanceUtc, StringFormat={}{0:dd/MM/yyyy}}" Width="*"/>
+                <DataGridTextColumn Header="Próximo mantenimiento" Binding="{Binding NextMaintenanceUtc, StringFormat={}{0:dd/MM/yyyy}}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <Button x:Name="EditButton" Content="Editar equipo" Click="EditEquipment_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+            <TextBox x:Name="DeleteReasonBox" Width="230" ToolTip="Motivo de la baja" Margin="0,0,10,0"/>
+            <Button x:Name="DeleteButton" Content="Dar de baja" Click="DeleteEquipment_Click" Background="#B43A3A" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+            <Button Content="Abrir hoja de vida" Click="OpenEquipment_Click" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Cerrar" Click="Close_Click" Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

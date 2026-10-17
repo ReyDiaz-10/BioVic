@@ -1,0 +1,126 @@
+<Window x:Class="BioVic.Desktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BioVic" Height="660" Width="1010"
+        WindowStartupLocation="CenterScreen" FontSize="13">
+    <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="240" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+
+        <!-- BARRA LATERAL IZQUIERDA -->
+        <Border Grid.Column="0" Background="#123A43">
+            <Grid Margin="22,24">
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="42" Height="42" CornerRadius="13" Background="#10A3AF">
+                            <TextBlock Text="B" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Margin="12,0,0,0">
+                            <TextBlock Text="BioVic" Foreground="White" FontSize="25" FontWeight="Bold" />
+                            <TextBlock Text="Tecnología biomédica" Foreground="#A9CAD0" FontSize="12" />
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <TextBlock Text="CONSULTA" Foreground="#7FA8B0" FontSize="11" FontWeight="Bold" Margin="0,36,0,10" />
+                    <Border Background="#FFFFFF18" CornerRadius="9" Padding="12">
+                        <TextBlock Text="🔍   Buscar equipos" Foreground="White" FontWeight="SemiBold" FontSize="14" />
+                    </Border>
+                    
+                    <TextBlock Text="GESTIÓN" Foreground="#7FA8B0" FontSize="11" FontWeight="Bold" Margin="0,26,0,6" />
+                    
+                    <!-- BOTONES DE GESTIÓN CONECTADOS A COMANDOS -->
+                    <Button Content="▪  Inventario" Command="{Binding GoToInventoryCommand}" Style="{StaticResource GhostButton}" Foreground="#B9D3D8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,2" Padding="8,6" FontSize="14" />
+                    <Button Content="▪  Mantenimientos" Command="{Binding GoToMaintenancesCommand}" Style="{StaticResource GhostButton}" Foreground="#B9D3D8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,2" Padding="8,6" FontSize="14" />
+                    <Button Content="▪  Calibraciones" Command="{Binding GoToCalibrationsCommand}" Style="{StaticResource GhostButton}" Foreground="#B9D3D8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,2" Padding="8,6" FontSize="14" />
+                    <Button Content="▪  Tecnovigilancia" Command="{Binding GoToVigilanceCommand}" Style="{StaticResource GhostButton}" Foreground="#B9D3D8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,2" Padding="8,6" FontSize="14" />
+                    
+                    <TextBlock Text="ADMINISTRACIÓN" Foreground="#7FA8B0" FontSize="11" FontWeight="Bold" Margin="0,20,0,6" Visibility="{Binding IsMaster, Converter={StaticResource BoolToVisibility}}" />
+                    <Button Content="▪  Dashboard y auditoría" Command="{Binding GoToDashboardCommand}" Style="{StaticResource GhostButton}" Foreground="#B9D3D8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,2" Padding="8,6" FontSize="14" Visibility="{Binding IsMaster, Converter={StaticResource BoolToVisibility}}" />
+                </StackPanel>
+                
+                <!-- BLOQUE DE USUARIO CORREGIDO (Fondo oscuro y letras blancas legibles) -->
+                <Border Grid.Row="2" Background="#184852" CornerRadius="12" Padding="12">
+                    <StackPanel>
+                        <TextBlock Text="{Binding CurrentUser}" Foreground="White" TextWrapping="Wrap" FontSize="13" />
+                        <Button Content="Iniciar sesión" Command="{Binding LoginCommand}" Foreground="#C8E5E9" HorizontalAlignment="Left" Margin="-10,6,0,-6" FontSize="13">
+                            <Button.Style><Style TargetType="Button" BasedOn="{StaticResource GhostButton}"><Style.Triggers><DataTrigger Binding="{Binding IsAuthenticated}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                        </Button>
+                        <Button Content="Cerrar sesión" Command="{Binding LogoutCommand}" Foreground="#C8E5E9" HorizontalAlignment="Left" Margin="-10,6,0,-6" FontSize="13">
+                            <Button.Style><Style TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding IsAuthenticated}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <Grid Grid.Column="1" Margin="34,26,34,24">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <StackPanel>
+                    <TextBlock Text="Inventario biomédico" FontSize="26" FontWeight="Bold" />
+                    <TextBlock Text="Busca por nombre, serial, modelo, código, fabricante o ubicación." Foreground="{StaticResource MutedBrush}" Margin="0,4,0,0" FontSize="14" />
+                </StackPanel>
+                <Button Content="＋  Nuevo equipo" Command="{Binding NewEquipmentCommand}" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="{Binding CanEdit}" ToolTip="Requiere rol Editor o Administrador Maestro" FontSize="14" />
+            </Grid>
+
+            <Border Grid.Row="1" Background="White" CornerRadius="15" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" Padding="10" Margin="0,24,0,14">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontSize="16" MinHeight="46" ToolTip="Buscar equipo" KeyDown="SearchBox_KeyDown" VerticalContentAlignment="Center" />
+                    <Button Grid.Column="1" Content="Buscar" Command="{Binding SearchCommand}" Style="{StaticResource PrimaryButton}" MinWidth="108" FontSize="14" />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="2" Margin="2,0,2,12">
+                <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" FontSize="14" />
+                
+                <!-- SUGERENCIA CON TEXTO OSCURO Y LEGIBLE -->
+                <Border HorizontalAlignment="Right" Background="#FFF3D7" CornerRadius="8" Padding="10,6" Visibility="{Binding HasSuggestion, Converter={StaticResource BoolToVisibility}}">
+                    <Button Command="{Binding UseSuggestionCommand}" Style="{StaticResource GhostButton}" Padding="2" MinHeight="0">
+                        <TextBlock Foreground="#15323A" FontSize="14">
+                            <Run Text="Quizá quisiste decir: " />
+                            <Run Text="{Binding Suggestion}" FontWeight="Bold" />
+                        </TextBlock>
+                    </Button>
+                </Border>
+            </Grid>
+
+            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Results}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="14" Padding="18" Margin="0,0,0,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="58" /><ColumnDefinition Width="2*" /><ColumnDefinition Width="1.2*" /><ColumnDefinition Width="1.2*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                    <Border Width="48" Height="48" CornerRadius="12" Background="#E4F4F5" VerticalAlignment="Center">
+                                        <TextBlock Text="✚" Foreground="{StaticResource PrimaryBrush}" FontSize="21" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" FontSize="17" FontWeight="SemiBold" />
+                                        <TextBlock Foreground="{StaticResource MutedBrush}" FontSize="13">
+                                            <Run Text="Código: " /><Run Text="{Binding InternalCode}" /><Run Text="  ·  Serial: " /><Run Text="{Binding SerialNumber}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                        <TextBlock Text="MARCA / MODELO" FontSize="11" Foreground="{StaticResource MutedBrush}" FontWeight="Bold" />
+                                        <TextBlock Margin="0,4,0,0" FontSize="14"><Run Text="{Binding Brand}" /><Run Text=" · " /><Run Text="{Binding Model}" /></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                        <TextBlock Text="UBICACIÓN" FontSize="11" Foreground="{StaticResource MutedBrush}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Location}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" FontSize="14" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <TextBlock Text="{Binding Status, Converter={StaticResource StatusText}}" Foreground="{Binding Status, Converter={StaticResource StatusBrush}}" FontWeight="Bold" HorizontalAlignment="Right" FontSize="13" />
+                                        <Button Content="Ver hoja de vida  →" Command="{Binding DataContext.OpenDetailsCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" Style="{StaticResource GhostButton}" Margin="8,3,-8,-6" FontSize="13" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

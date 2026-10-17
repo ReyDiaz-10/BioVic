@@ -1,0 +1,44 @@
+<Window x:Class="BioVic.Desktop.Views.EquipmentDocumentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Documentos del equipo · BioVic" Height="700" Width="1080"
+        MinHeight="600" MinWidth="900" WindowStartupLocation="CenterOwner">
+    <Grid Margin="22">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Documentos, fotos y certificados" FontSize="25" FontWeight="Bold"/>
+            <TextBlock x:Name="EquipmentNameText" Foreground="{StaticResource MutedBrush}" Margin="0,4,0,14"/>
+            <WrapPanel>
+                <Button Content="Actualizar" Click="Refresh_Click" Style="{StaticResource SecondaryButton}"/>
+                <Button x:Name="UploadButton" Content="Agregar documento" Click="Upload_Click" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/>
+                <Button x:Name="NewVersionButton" Content="Nueva versión" Click="NewVersion_Click" Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                <Button Content="Descargar seleccionado" Click="Download_Click" Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                <CheckBox x:Name="IncludeArchivedBox" Content="Mostrar archivados" VerticalAlignment="Center" Margin="18,0,0,0" Checked="IncludeArchived_Changed" Unchecked="IncludeArchived_Changed"/>
+            </WrapPanel>
+        </StackPanel>
+        <DataGrid x:Name="DocumentsGrid" Grid.Row="1" Margin="0,16,0,14" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Archivo" Binding="{Binding OriginalName}" Width="2*"/>
+                <DataGridTextColumn Header="Tipo" Binding="{Binding DocumentType}" Width="140"/>
+                <DataGridTextColumn Header="Versión" Binding="{Binding Version}" Width="70"/>
+                <DataGridCheckBoxColumn Header="Actual" Binding="{Binding IsCurrent}" Width="70"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding DocumentDateUtc, StringFormat={}{0:dd/MM/yyyy}}" Width="100"/>
+                <DataGridTextColumn Header="Vence" Binding="{Binding ExpiresAtUtc, StringFormat={}{0:dd/MM/yyyy}}" Width="100"/>
+                <DataGridTextColumn Header="Tamaño" Binding="{Binding SizeBytes}" Width="90"/>
+                <DataGridCheckBoxColumn Header="Referencia" Binding="{Binding ApprovedForAiKnowledge}" Width="80"/>
+                <DataGridCheckBoxColumn Header="Archivado" Binding="{Binding IsDeleted}" Width="85"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Description}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ReasonLabel" Text="Motivo:" VerticalAlignment="Center"/>
+                <TextBox x:Name="ReasonBox" Width="300" Margin="8,0,0,0"/>
+                <Button x:Name="ArchiveButton" Content="Archivar lógicamente" Click="Archive_Click" Background="#B43A3A" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/>
+                <Button x:Name="RestoreButton" Content="Restaurar" Click="Restore_Click" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/>
+            </StackPanel>
+            <TextBlock Grid.Column="1" x:Name="StatusText" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" TextAlignment="Right"/>
+        </Grid>
+    </Grid>
+</Window>

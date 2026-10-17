@@ -1,0 +1,22 @@
+<Window x:Class="BioVic.Desktop.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Iniciar sesión · BioVic" Width="450" Height="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid Margin="40,32"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <StackPanel>
+            <Border Width="52" Height="52" CornerRadius="16" Background="{StaticResource PrimaryBrush}" HorizontalAlignment="Left"><TextBlock Text="B" Foreground="White" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+            <TextBlock Text="Bienvenido a BioVic" FontSize="26" FontWeight="Bold" Margin="0,18,0,5" />
+            <TextBlock Text="Inicia sesión para acceder a la información de BioVic." Foreground="{StaticResource MutedBrush}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="0,22,0,0">
+            <TextBlock Text="Usuario" Style="{StaticResource FieldLabel}" /><TextBox x:Name="UsernameBox" TabIndex="1" />
+            <TextBlock Text="Contraseña" Style="{StaticResource FieldLabel}" /><PasswordBox x:Name="PasswordBox" TabIndex="2" KeyDown="PasswordBox_KeyDown" />
+            <ProgressBar x:Name="LoginProgress" Height="4" Margin="0,16,0,0" IsIndeterminate="True" Visibility="Collapsed" />
+            <TextBlock x:Name="StatusText" Foreground="{StaticResource PrimaryBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
+            <TextBlock x:Name="ErrorText" Foreground="#BE3A3A" TextWrapping="Wrap" Margin="0,15,0,0" />
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Button x:Name="LoginButton" Content="Iniciar sesión" Style="{StaticResource PrimaryButton}" Click="LoginButton_Click" TabIndex="3" />
+        </StackPanel>
+    </Grid>
+</Window>

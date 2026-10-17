@@ -1,0 +1,20 @@
+BIOVIC — APLICAR INCREMENTO FINAL
+
+1. Cierre BioVic y Visual Studio.
+2. Extraiga este ZIP en una carpeta normal; no lo ejecute desde dentro del ZIP.
+3. Abra PowerShell 7 en la carpeta extraída.
+4. Ejecute exactamente:
+
+   Unblock-File .\aplicar-incremento-final.ps1
+
+   pwsh -NoProfile -ExecutionPolicy Bypass -File .\aplicar-incremento-final.ps1 `
+     -ProjectRoot "C:\Users\neilm\OneDrive\Desktop\BioVic\BioVic"
+
+El script:
+- comprueba que el portal móvil seguro ya existe;
+- crea una copia de seguridad recuperable de cada archivo afectado y de las migraciones;
+- aplica únicamente el incremento;
+- genera migraciones aditivas para SQLite y SQL Server;
+- restaura, compila y ejecuta las pruebas.
+
+No ejecuta despliegues ni modifica Azure. Cuando termine con el mensaje verde, publique primero el API siguiendo el mismo proceso de Kudu que ya le funcionó y compruebe /health. Luego continúe con la aceptación funcional incluida en docs.

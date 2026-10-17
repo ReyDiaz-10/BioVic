@@ -1,0 +1,21 @@
+<Window x:Class="BioVic.Desktop.Views.LocationEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nueva ubicación · BioVic" Width="520" Height="680" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid Margin="34,26"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <StackPanel><TextBlock x:Name="HeadingText" Text="Nueva ubicación" FontSize="24" FontWeight="Bold" /><TextBlock Text="Registra la ubicación de forma estructurada." Foreground="{StaticResource MutedBrush}" Margin="0,4,0,10" /></StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><StackPanel>
+            <TextBlock Text="Institución *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="InstitutionBox" />
+            <TextBlock Text="Sede *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="SiteBox" />
+            <TextBlock Text="Edificio" Style="{StaticResource FieldLabel}" /><TextBox x:Name="BuildingBox" />
+            <TextBlock Text="Piso" Style="{StaticResource FieldLabel}" /><TextBox x:Name="FloorBox" />
+            <TextBlock Text="Servicio *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ServiceBox" />
+            <TextBlock Text="Área" Style="{StaticResource FieldLabel}" /><TextBox x:Name="AreaBox" />
+            <TextBlock Text="Habitación" Style="{StaticResource FieldLabel}" /><TextBox x:Name="RoomBox" />
+            <TextBlock Text="Ubicación específica" Style="{StaticResource FieldLabel}" /><TextBox x:Name="SpecificBox" />
+            <StackPanel x:Name="ChangeReasonPanel" Visibility="Collapsed"><TextBlock Text="Motivo de la modificación *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ChangeReasonBox" Height="55" AcceptsReturn="True" TextWrapping="Wrap" /></StackPanel>
+            <TextBlock x:Name="ErrorText" Foreground="#BE3A3A" TextWrapping="Wrap" Margin="0,12,0,0" />
+        </StackPanel></ScrollViewer>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0"><Button Content="Cancelar" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0" Click="CancelButton_Click" /><Button x:Name="SaveButton" Content="Guardar ubicación" Style="{StaticResource PrimaryButton}" Click="SaveButton_Click" /></StackPanel>
+    </Grid>
+</Window>

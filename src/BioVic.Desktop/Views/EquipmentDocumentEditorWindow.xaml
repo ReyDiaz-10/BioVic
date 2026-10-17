@@ -1,0 +1,20 @@
+<Window x:Class="BioVic.Desktop.Views.EquipmentDocumentEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Datos del documento · BioVic" Height="470" Width="520" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <StackPanel Margin="26">
+        <TextBlock Text="Datos del documento" FontSize="23" FontWeight="Bold"/>
+        <TextBlock Text="El archivo se validará y se conservará con control de integridad SHA-256." Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,4,0,12"/>
+        <TextBlock Text="Tipo" Style="{StaticResource FieldLabel}"/><ComboBox x:Name="DocumentTypeBox"/>
+        <TextBlock Text="Descripción" Style="{StaticResource FieldLabel}"/><TextBox x:Name="DescriptionBox" Height="56" AcceptsReturn="True" TextWrapping="Wrap"/>
+        <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <StackPanel><TextBlock Text="Fecha del documento" Style="{StaticResource FieldLabel}"/><DatePicker x:Name="DocumentDatePicker"/></StackPanel>
+            <StackPanel Grid.Column="2"><TextBlock Text="Vencimiento (opcional)" Style="{StaticResource FieldLabel}"/><DatePicker x:Name="ExpiresAtPicker"/></StackPanel>
+        </Grid>
+        <CheckBox x:Name="ApprovedForAiBox" Content="Autorizar contenido para la base de conocimiento de BioVic IA" Margin="0,16,0,0"/>
+        <WrapPanel HorizontalAlignment="Right" Margin="0,22,0,0">
+            <Button Content="Cancelar" IsCancel="True" Style="{StaticResource SecondaryButton}"/>
+            <Button Content="Continuar" Click="Continue_Click" IsDefault="True" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/>
+        </WrapPanel>
+    </StackPanel>
+</Window>

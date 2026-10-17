@@ -1,0 +1,46 @@
+@host = http://127.0.0.1:5180
+@token = PEGUE_AQUI_EL_TOKEN
+
+### Salud
+GET {{host}}/health
+
+### Estado de configuración inicial
+GET {{host}}/api/setup/status
+
+### Crear Administrador Maestro (solo primer inicio)
+POST {{host}}/api/setup/master
+Content-Type: application/json
+
+{
+  "firstName": "Administrador",
+  "lastName": "BioVic",
+  "username": "admin",
+  "password": "Cambiar!2026",
+  "confirmPassword": "Cambiar!2026",
+  "email": null
+}
+
+### Login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Cambiar!2026",
+  "computerName": "PC-DEMO"
+}
+
+### Generar 20 equipos ficticios en Development
+POST {{host}}/api/admin/demo/seed
+Authorization: Bearer {{token}}
+
+### Búsqueda con error ortográfico
+GET {{host}}/api/equipment/search?q=monitr%20multiparametrco&page=1&pageSize=25
+
+### Dashboard
+GET {{host}}/api/admin/dashboard
+Authorization: Bearer {{token}}
+
+### Integridad de auditoría
+GET {{host}}/api/admin/audit/integrity
+Authorization: Bearer {{token}}

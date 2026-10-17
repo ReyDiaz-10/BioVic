@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.idea/
+.vscode/
+.env
+data/
+logs/
+installers/
+backups/
+documents/
+photos/
+artifacts/
+*.user
+*.suo
+TestResults/

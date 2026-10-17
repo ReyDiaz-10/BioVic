@@ -1,0 +1,43 @@
+<Window x:Class="BioVic.Desktop.Views.EquipmentEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nuevo equipo · BioVic" Width="760" Height="760" MinHeight="650" WindowStartupLocation="CenterOwner">
+    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <Border Background="White" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,0,1" Padding="28,20">
+            <StackPanel><TextBlock x:Name="HeadingText" Text="Registrar equipo" FontSize="24" FontWeight="Bold" /><TextBlock Text="Los datos obligatorios están marcados con *. El registro quedará en auditoría." Foreground="{StaticResource MutedBrush}" Margin="0,4,0,0" /></StackPanel>
+        </Border>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="30,18"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="IDENTIFICACIÓN" Foreground="{StaticResource PrimaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,4,0,4" />
+                    <TextBlock Text="Código interno *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="CodeBox" />
+                    <TextBlock Text="Nombre del equipo *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="NameBox" />
+                    <TextBlock Text="Tipo" Style="{StaticResource FieldLabel}" /><TextBox x:Name="TypeBox" />
+                    <TextBlock Text="Categoría" Style="{StaticResource FieldLabel}" /><TextBox x:Name="CategoryBox" />
+                    <TextBlock Text="Fabricante" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ManufacturerBox" />
+                    <TextBlock Text="Marca" Style="{StaticResource FieldLabel}" /><TextBox x:Name="BrandBox" />
+                    <TextBlock Text="Modelo" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ModelBox" />
+                    <TextBlock Text="Número de serie" Style="{StaticResource FieldLabel}" /><TextBox x:Name="SerialBox" />
+                    <TextBlock Text="Número de inventario" Style="{StaticResource FieldLabel}" /><TextBox x:Name="InventoryBox" />
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="OPERACIÓN" Foreground="{StaticResource PrimaryBrush}" FontSize="11" FontWeight="Bold" Margin="0,4,0,4" />
+                    <TextBlock Text="Ubicación *" Style="{StaticResource FieldLabel}" />
+                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><ComboBox x:Name="LocationBox" DisplayMemberPath="DisplayName" SelectedValuePath="Id" /><Button Grid.Column="1" x:Name="CreateLocationButton" Content="＋" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Padding="13,8" ToolTip="Crear ubicación" Click="CreateLocationButton_Click" /></Grid>
+                    <TextBlock Text="Responsable" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ResponsibleBox" />
+                    <TextBlock Text="Cargo" Style="{StaticResource FieldLabel}" /><TextBox x:Name="PositionBox" />
+                    <TextBlock Text="Estado inicial" Style="{StaticResource FieldLabel}" /><ComboBox x:Name="StatusBox" />
+                    <TextBlock Text="Criticidad" Style="{StaticResource FieldLabel}" /><ComboBox x:Name="CriticalityBox" />
+                    <CheckBox x:Name="RequiresCalibrationBox" Content="Requiere calibración" Margin="0,18,0,4" />
+                    <TextBlock Text="Próximo mantenimiento" Style="{StaticResource FieldLabel}" /><DatePicker x:Name="NextMaintenancePicker" />
+                    <TextBlock Text="Próxima calibración" Style="{StaticResource FieldLabel}" /><DatePicker x:Name="NextCalibrationPicker" />
+                    <TextBlock Text="Observación operativa" Style="{StaticResource FieldLabel}" /><TextBox x:Name="NotesBox" Height="82" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top" />
+                    <StackPanel x:Name="ChangeReasonPanel" Visibility="Collapsed"><TextBlock Text="Motivo de la modificación *" Style="{StaticResource FieldLabel}" /><TextBox x:Name="ChangeReasonBox" Height="58" AcceptsReturn="True" TextWrapping="Wrap" /></StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <Border Grid.Row="2" Background="White" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" Padding="28,16">
+            <Grid><TextBlock x:Name="ErrorText" Foreground="#BE3A3A" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="430" HorizontalAlignment="Left" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="Cancelar" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0" Click="CancelButton_Click" /><Button x:Name="SaveButton" Content="Guardar equipo" Style="{StaticResource PrimaryButton}" Click="SaveButton_Click" /></StackPanel></Grid>
+        </Border>
+    </Grid>
+</Window>
