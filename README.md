@@ -38,6 +38,19 @@ BioVic.Infrastructure (EF Core) ── SQLite
 
 También puede abrir `BioVic.sln` y configurar varios proyectos de inicio: primero `BioVic.Api` y después `BioVic.Desktop`.
 
+## 🚀 Acceso de Demostración (Demo)
+
+Para facilitar la evaluación técnica del sistema sin necesidad de realizar configuraciones locales, la base de datos se encuentra desplegada y operativa en **Azure**. 
+
+Puedes iniciar sesión en la aplicación de escritorio utilizando las siguientes credenciales de prueba. 
+
+> **Nota Importante:** Este usuario cuenta con un rol **Informativo (Solo Lectura)**. Podrás navegar libremente por todos los módulos del sistema y visualizar la arquitectura de los datos, pero las acciones de creación, edición y eliminación (CRUD) se encuentran deshabilitadas para este perfil con el fin de proteger la integridad del entorno de demostración.
+
+* **Usuario:** demobiovic 
+* **Contraseña:** DemoBioVic2026*+
+* **Portal / API en Azure:** https://biovic-api-prod-2026-crckevccada8hsdb.canadacentral-01.azurewebsites.net/e/login
+
+
 ## Comandos
 
 ```powershell
