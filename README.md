@@ -35,15 +35,6 @@ BioVic.Infrastructure (EF Core) ── SQLite
           └── BioVic.QrPortal
 ```
 
-La aplicación WPF nunca abre SQLite directamente. Cambiar a SQL Server o PostgreSQL requiere sustituir el proveedor y ajustar migraciones, no reescribir la interfaz ni el dominio.
-
-## Inicio rápido en Windows
-
-1. Instale Visual Studio 2026 con las cargas de trabajo **Desarrollo de escritorio con .NET** y **ASP.NET y desarrollo web**, o instale el SDK .NET 10.
-2. Copie `.env.example` como `.env`.
-3. Ejecute `scripts\run-dev.ps1` desde PowerShell.
-4. En el primer inicio complete **Configuración inicial de BioVic**.
-5. Inicie sesión y registre el primer equipo.
 
 También puede abrir `BioVic.sln` y configurar varios proyectos de inicio: primero `BioVic.Api` y después `BioVic.Desktop`.
 
